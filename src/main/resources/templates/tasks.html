@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>タスク一覧</title>
+</head>
+
+<body>
+
+	<h1>タスク</h1>
+	<table border = "1">
+		<tr>
+			<th>タイトル</th>
+			<th>進捗状況</th>
+			<th>開始日</th>
+			<th>期限</th>
+			<th>予定所要時間</th>
+			<th>備考</th>
+		</tr>
+		<tr th:each="task:${tasks}">
+			<td th:text="${task.title}"></td>
+			<td th:text="${task.progress}"></td>
+			<td th:text="${task.date}"></td>
+			<td th:text="${task.closingDate}"></td>
+			<td th:text="${task.time}+'分'"></td>
+			<td th:text="${task.memo}"></td>
+			<td>
+				<form action="/task/create" method="post">
+					<input type="hidden" name="taskId" th:value="${task.taskId}">
+				</form>
+			</td>
+		</tr>
+	</table>
+
+</body>
+
+</html>

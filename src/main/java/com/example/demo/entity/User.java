@@ -20,25 +20,18 @@ public class User {
 
 	private String password;
 
-	private String password_confilm;
-
 	//コンストラクタ
 	public User() {
 	}
 
-	public User(String name, String password, String password_confilm) {
+	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
-		this.password_confilm = password_confilm;
 	}
 
 	//ゲッターセッター
 	public Integer getUserId() {
 		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 	public String getName() {
@@ -55,14 +48,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPasswordConfilm() {
-		return password_confilm;
-	}
-
-	public void setPasswordConfilm(String password_confilm) {
-		this.password_confilm = password_confilm;
 	}
 
 }

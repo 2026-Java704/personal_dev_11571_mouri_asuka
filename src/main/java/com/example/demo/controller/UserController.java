@@ -27,8 +27,6 @@ public class UserController {
 		this.account = account;
 	}
 
-	//タスク一覧画面を表示する
-
 	// ログイン画面を表示
 	@GetMapping({ "/", "/login", "/logout" })
 	public String index() {
@@ -44,9 +42,9 @@ public class UserController {
 			@RequestParam String password,
 			Model model) {
 
-		// 名前が空の場合にエラーとする
+		// どちらかが空の場合にエラーとする
 		if (name.length() == 0 || password.length() == 0) {
-			model.addAttribute("message", "入力してください");
+			model.addAttribute("message", "名前を入力してください");
 			return "login";
 		}
 
@@ -59,7 +57,7 @@ public class UserController {
 
 		User user = userList.get(0);
 
-		// セッション管理されたアカウント情報にIDと名前をセット
+		// アカウント情報にIDと名前をセット
 		account.setUserId(user.getUserId());
 		account.setName(user.getName());
 
@@ -77,13 +75,20 @@ public class UserController {
 	public String resister(
 			@RequestParam(defaultValue = "") String name,
 			@RequestParam(defaultValue = "") String password,
-			@RequestParam(defaultValue = "") String password_confilm) {
+			@RequestParam(defaultValue = "") String passwordConfirm,
+			Model model) {
 
-		User user = new User(name, password, password_confilm);
+		//		パスワード確認
+		if (password.equals(passwordConfirm) == false) {
+			model.addAttribute("error", "パスワードが一致しませんでした");
+			return "/addUser";
+		}
+
+		User user = new User(name, password);
 
 		userRepository.save(user);
 
-		return "redirect:/users";
+		return "redirect:/login";
 	}
 
 }

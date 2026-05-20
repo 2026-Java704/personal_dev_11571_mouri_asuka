@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -9,7 +7,6 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class Account {
 
-	@Column(name = "user_id")
 	private Integer userId;
 
 	private String name;
