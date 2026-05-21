@@ -11,7 +11,7 @@
 	<header>
 		<h1><a href="/tasks">タスク</a></h1>
 		<span th:text="${@account.name} + ' さんがログイン中'"></span>
-		<a href="/logout">ログアウト</a>
+		<a href="/logout" type="submit" onclick="return confirm('ログアウトします。よろしいですか？');">ログアウト</a>
 	</header>
 
 	<form action="/tasks" method="get">
@@ -22,7 +22,7 @@
 
 		<input type="radio" name="categoryId" value="2" th:checked="${categoryId == 2}">日常
 
-		<button type="submit" name="sort" value="closingDateAsc">
+		<button type="submit">
 			期限順
 		</button>
 
@@ -41,7 +41,7 @@
 
 			<tr>
 				<td colspan="8" style="background-color: #f5f5f5; padding: 10px;">
-					<div style="display: flex; gap: 10px; align-items: center; wrap: wrap;">
+					<div style="display: flex; gap: 10px; align-items: center;">
 
 						<button type="submit" name="date" th:value="${today}"
 							style="width: 100%;">

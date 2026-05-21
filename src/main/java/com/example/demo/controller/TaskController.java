@@ -72,8 +72,6 @@ public class TaskController {
 		}
 
 		model.addAttribute("tasks", taskList);
-		model.addAttribute("categoryId", categoryId);
-		model.addAttribute("sort", sort);
 		model.addAttribute("selectedDate", date);
 		model.addAttribute("today", LocalDate.now());
 
