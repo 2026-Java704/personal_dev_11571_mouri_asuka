@@ -1,8 +1,8 @@
-INSERT INTO tasks ( user_id, title, closing_date, progress, memo, time, date)
-			VALUES( 1, '見積もり', '2025-12-31', 0, '案件に適した見積もりを取る' ,'40', '2025-12-30');
+INSERT INTO tasks (category_id, user_id, title, closing_date, progress, memo, time, date)
+			VALUES(1, 1, '見積もり', '2025-12-31', 0, '案件に適した見積もりを取る' ,'40', '2025-12-30');
 			
 INSERT INTO categories (category_id, category_name) VALUES(1, '仕事');
 INSERT INTO categories (category_id, category_name) VALUES(2, '日常');
 			
-INSERT INTO users ( name, password) VALUES( '田中太郎', 'test123');
-INSERT INTO users ( name, password) VALUES( '鈴木一郎', 'test456');
+INSERT INTO users (name, password) VALUES( '田中太郎', 'test123');
+INSERT INTO users (name, password) VALUES( '鈴木一郎', 'test456');

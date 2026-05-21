@@ -6,27 +6,30 @@
 	<title>新規作成</title>
 </head>
 
-<h1>タスク作成</h1>
+
 
 <body>
+	
+	<h1>タスク作成</h1>
 	<form action="/tasks/create" method="post">
 
 
 		<table border="1">
 			<tr>
 				<th>カテゴリー</th>
+				
 				<td>
 					<input type="radio" id="1" name="categoryId" value="1">
-					<label for="仕事">仕事</label>
+					<label for="1">仕事</label>
 
 					<input type="radio" id="2" name="categoryId" value="2">
-					<label for="日常">日常</label><br>
+					<label for="2">日常</label><br>
 				</td>
 			</tr>
 			<tr>
 				<th>タイトル</th>
 				<td>
-					<input type="text" name="title">
+					<input type="text" th:value="${title}" name="title">
 				</td>
 			</tr>
 			<tr>
@@ -44,18 +47,19 @@
 			<tr>
 				<th>予定所要時間(分)</th>
 				<td>
-					<input type="text" name="time">
+					<input type="text" th:value="${time}" name="time">
 				</td>
 			</tr>
 			<tr>
 				<th>備考</th>
 				<td>
-					<input type="textarea" name="memo">
+					<input type="textarea" th:value="${memo}" name="memo">
 				</td>
 			</tr>
 	
 		</table>
 		<button>作成</button>
+		
 	</form>
 </body>
 

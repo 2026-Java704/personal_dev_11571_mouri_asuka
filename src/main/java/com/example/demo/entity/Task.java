@@ -23,6 +23,9 @@ public class Task {
 	@Column(name = "user_id")
 	private Integer userId;
 
+	@Column(name = "category_id")
+	private Integer categoryId;
+
 	private String title;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -41,14 +44,29 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(String title, LocalDate closingDate,
+	public Task(Integer categoryId, String title, LocalDate closingDate,
 			Integer progress, String memo, Integer time, LocalDate date) {
 
 		//		this.taskId = taskId;
 		//		this.userId = userId;
+		this.categoryId = categoryId;
 		this.title = title;
 		this.closingDate = closingDate;
 		this.progress = progress;
+		this.memo = memo;
+		this.time = time;
+		this.date = date;
+
+	}
+
+	public Task(Integer categoryId, String title, LocalDate closingDate,
+			String memo, Integer time, LocalDate date) {
+
+		//		this.taskId = taskId;
+		//		this.userId = userId;
+		this.categoryId = categoryId;
+		this.title = title;
+		this.closingDate = closingDate;
 		this.memo = memo;
 		this.time = time;
 		this.date = date;
@@ -118,6 +136,14 @@ public class Task {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 }
