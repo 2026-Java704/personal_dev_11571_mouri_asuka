@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+/*全体共通*/
+* {
+	box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+}
+
+/*ログイン画面*/
+body.page-login {
+	font-family: Arial, sans-serif;
+	background-color: rgb(199, 208, 243);
+	padding: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.login {
+	margin: 20px auto;
+	width: 300px;
+}
+
+.login-screen {
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.app-title {
+	text-align: center;
+	color: #777;
+}
+
+.login-form {
+	text-align: center;
+}
+
+.control-group {
+	margin-bottom: 10px;
+}
+
+.login-form input {
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+	transition: border .5s;
+}
+
+.login-form input:focus {
+	border: 2px solid rgb(199, 208, 243);
+	box-shadow: none;
+}
+
+.login-form button.btn {
+	border: 2px solid transparent;
+	background: #3498DB;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 10px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 250px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.login-form button.btn:hover {
+	background-color: #2980B9;
+}
+
+.login-link {
+	font-size: 12px;
+	color: #444;
+	display: block;
+	margin-top: 12px;
+	text-decoration: none;
+}
+
+/*タスク一覧画面*/
+body.page-tasks {
+	background-color: #ECF0F1; 
+	margin: 0;
+	padding: 20px;
+	font-family: Arial, sans-serif;
+}
+
+body.page-tasks main {
+	background-color: #FFF;
+	padding: 30px;
+	border-radius: 10px;
+	max-width: 1000px;
+	margin: 20px auto;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+body.page-tasks header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #ECF0F1;
+	margin-bottom: 20px;
+}
+
+body.page-tasks header h1 a {
+	color: rgb(131, 131, 248); 
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.category-select {
+	margin-bottom: 20px;
+	color: #555;
+}
+
+/*テーブル*/
+body.page-tasks table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+body.page-tasks th {
+	background-color: rgb(131, 131, 248);
+	color: white;
+	padding: 12px 10px;
+	font-size: 14px;
+}
+
+body.page-tasks td {
+	padding: 12px 10px;
+	border-bottom: 1px solid #ECF0F1;
+	color: rgb(34, 34, 34);
+	font-size: 14px;
+	text-align: center;
+}
+
+body.page-tasks tr:hover {
+	background-color: #F8F9FA;
+}
+
+.total-time-box {
+	background-color: #EBF5FB;
+	color: #2980B9;
+	padding: 12px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 8px;
+	margin-bottom: 15px;
+}
+
+.search-box {
+	background-color: #F9F9F9;
+	padding: 15px;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #EBF5FB;
+}
+
+.logout-link {
+	color: #e74c3c;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+/*ボタン共通*/
+.btn {
+	display: inline-block;
+}
+
+/*期限順ボタン*/
+.btn button.btn-sort {
+	background-color: rgb(131, 131, 248);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+	margin: 0.5px;
+	padding: 5px 20px;
+	width: 80px;
+}
+
+/*変更ボタン*/
+.btn button.btn-change {
+	background-color: rgb(131, 131, 248);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+	margin: 0.5px;
+	padding: 5px 10px;
+	width: 50px;
+}
+
+/*進捗更新ボタン*/
+.btn button.btn-update {
+	background-color: rgb(131, 131, 248);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+	margin: 0.5px;
+	padding: 3px 8px;
+	font-size: 10px;
+	line-height: 1.2;
+	width: 45px;
+}
+
+/*検索ボタン*/
+.btn button.btn-add {
+	background-color: rgb(131, 131, 248);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+	margin: 2px;
+	padding: 5px 20px;
+	width: 80px;
+}
+
+
+/*タスク追加/タスク編集画面*/
+body.page-task-form {
+	font-family: Arial, sans-serif;
+	background-color: rgb(199, 208, 243);
+	padding: 30px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+
+.form-container {
+	background-color: #FFF;
+	padding: 30px;
+	border-radius: 10px;
+	width: 100%;
+	max-width: 400px;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-container h1 {
+	text-align: center;
+	color: #555;
+	font-size: 22px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+
+.form-label {
+	display: block;
+	text-align: left;
+	color: #777;
+	font-size: 13px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+
+.form-input {
+	text-align: center;
+	background-color: #ECF0F1; 
+	border: 2px solid transparent;
+	border-radius: 10px;
+	font-size: 15px;
+	padding: 10px;
+	width: 100%;
+	margin-bottom: 15px;
+	transition: border .5s;
+	display: block;
+}
+
+.form-input:focus {
+	border: 2px solid #3498DB;
+}
+
+
+.radio-group {
+	text-align: left;
+	background-color: #F8F9FA;
+	padding: 12px;
+	border-radius: 10px;
+	margin-bottom: 15px;
+	color: #555;
+	font-size: 14px;
+}
+
+.radio-group input[type="radio"] {
+	margin-right: 5px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+
+.form-actions {
+	margin-top: 20px;
+	text-align: center;
+}
+
+
+.form-actions button.btn-submit {
+	border: 2px solid transparent;
+	background: #3498DB;
+	color: #ffffff;
+	font-size: 16px;
+	padding: 12px 0;
+	border-radius: 10px;
+	transition: 0.25s;
+	display: block;
+	width: 100%;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.form-actions button.btn-submit:hover {
+	background-color: #2980B9;
+}
+
+
+.back-link {
+	font-size: 13px;
+	color: #777;
+	display: block;
+	margin-top: 15px;
+	text-decoration: none;
+	text-align: center;
+}
+.back-link:hover {
+	text-decoration: underline;
+}
+

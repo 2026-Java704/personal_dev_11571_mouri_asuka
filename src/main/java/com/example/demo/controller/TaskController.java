@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,23 +58,54 @@ public class TaskController {
 				taskList = taskRepository.findByUserIdOrderByClosingDateAsc(userId);
 			} else {
 				// 日付の指定だけあるとき
-				taskList = taskRepository.findByUserIdAndDateOrderByClosingDateAsc(userId, date);
+				taskList = taskRepository.findByUserIdAndClosingDateLessThanEqualOrderByClosingDateAsc(userId, date);
 			}
 		} else {
 			// カテゴリーが選ばれているとき
 			if (date != null) {
 				// ユーザーID ＋ カテゴリー ＋ 日付 ＋ 期限順(できてないかも)
-				taskList = taskRepository.findByUserIdAndCategoryIdAndDateOrderByClosingDateAsc(userId, categoryId,
-						date);
+				taskList = taskRepository.findByUserIdAndCategoryIdAndDateOrderByClosingDateAsc(
+						userId, categoryId, date);
 			} else {
 				// ユーザーID ＋ カテゴリー ＋ 期限順
 				taskList = taskRepository.findByUserIdAndCategoryIdOrderByClosingDateAsc(userId, categoryId);
 			}
 		}
 
-		model.addAttribute("tasks", taskList);
+		List<Task> displayTaskList = new ArrayList<>();
+		int totalTime = 0; // 合計時間を数える
+
+		if (taskList != null) {
+			for (Task task : taskList) {
+				// 日付が選ばれているとき
+				if (date != null) {
+					if (task.getClosingDate() != null && task.getClosingDate().equals(date)) {
+
+						// 進捗がデフォルトのまま（null）なら「0」を入れる
+						if (task.getProgress() == null) {
+							task.setProgress(0);
+						}
+
+						// 期限が「選んだ日付」と同じ、かつ、進捗が「2(完了)」未満のタスク
+						if (task.getClosingDate().equals(date) && task.getProgress() < 2) {
+							displayTaskList.add(task);
+
+							// 合計時間に足し算する
+							if (task.getTime() != null) {
+								totalTime += task.getTime();
+							}
+						}
+					}
+				} else {
+					// 日付が選ばれていないときは、すべて表示リストに入れる
+					displayTaskList.add(task);
+				}
+			}
+		}
+
+		model.addAttribute("tasks", displayTaskList);
 		model.addAttribute("selectedDate", date);
-		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("totalTime", totalTime);
 
 		return "tasks";
 	}
@@ -135,21 +167,52 @@ public class TaskController {
 			@RequestParam(defaultValue = "") Integer progress,
 			@RequestParam(defaultValue = "") String memo,
 			@RequestParam(defaultValue = "") Integer time,
-			@RequestParam(defaultValue = "") LocalDate date) {
+			@RequestParam(defaultValue = "") LocalDate date,
+			@RequestParam(defaultValue = "false") boolean stepProgress,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) {
 
 		//	ID（主キー）で検索
 		Task task = taskRepository.findById(taskId).get();
-		task.setCategoryId(categoryId);
-		task.setTitle(title);
-		task.setClosingDate(closingDate);
-		task.setProgress(progress);
-		task.setMemo(memo);
-		task.setTime(time);
-		task.setDate(date);
-		task.setUserId(account.getUserId());
 
-		//	反映（UPDATE）
-		taskRepository.save(task);
+		if (stepProgress == true) {
+
+			//進捗がデフォルトのままなら「0」を入れる	
+			if (task.getProgress() == null) {
+				task.setProgress(0);
+			}
+
+			// 「進捗更新」ボタンが押されたとき
+			int nextProgress = task.getProgress() + 1; // 今の進捗に +1 する
+
+			if (nextProgress >= 2) {
+				// +1した結果が「2（完了）」になったら、このタスクを削除する
+				taskRepository.deleteById(taskId);
+			} else {
+				// +1した結果が「1（進行中）」なら、更新する
+				task.setProgress(nextProgress);
+				taskRepository.save(task);
+			}
+
+		} else {
+
+			// 編集画面（editTask）から「保存」ボタンが押されたとき
+			task.setCategoryId(categoryId);
+			task.setTitle(title);
+			task.setClosingDate(closingDate);
+			task.setProgress(progress);
+			task.setMemo(memo);
+			task.setTime(time);
+			task.setDate(date);
+			task.setUserId(account.getUserId());
+			taskRepository.save(task);
+		}
+
+		if (selectedDate != null) {
+			return "redirect:/tasks?date=" + selectedDate;
+		}
+
+		//	反映
+		//		taskRepository.save(task);
 
 		return "redirect:/tasks";
 	}
@@ -162,5 +225,4 @@ public class TaskController {
 
 		return "redirect:/tasks";
 	}
-
 }

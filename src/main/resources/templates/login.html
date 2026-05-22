@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>ログイン</title>
-</head>
-<body>
 
-	<h1>ログイン</h1>
-		
-		<span th:text="${message}" style="color: red"></span>
-		<form action="/login" method="post">
-			<table border="1">
-				<tr>
-					<td>
-						<input type="text" name="name" th:value="${name}" placeholder="ユーザー名">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="password" name="password" placeholder="パスワード">
-					</td>
-				</tr>
-			</table>
-			<button>ログイン</button>
-			<br><a href="/users/add">新規登録</a>
-		</form>
-	
+<head>
+	<meta charset="UTF-8">
+	<title>ログイン</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body class="page-login">
+
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>ログイン</h1>
+			</div>
+
+			<span th:text="${message}" class="control-group"
+				style="color: rgb(128, 0, 0); display: block; text-align: center; margin-bottom: 10px;"></span>
+				
+			<form action="/login" method="post" class="login-form">
+
+				<div class="control-group">
+					<input type="text" class="login-field" name="name" th:value="${name}" placeholder="名前"
+						id="login-name">
+					<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<div class="control-group">
+					<input type="password" class="login-field" name="password" placeholder="パスワード" id="login-pass">
+					<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+
+
+				<button type="submit" class="btn btn-primary btn-large btn-block">ログイン</button>
+
+				<a class="login-link" href="/users/add">新規登録はこちら</a>
+			</form>
+		</div>
+	</div>
+
 </body>
+
 </html>

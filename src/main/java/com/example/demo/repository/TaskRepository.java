@@ -9,24 +9,6 @@ import com.example.demo.entity.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
-	// カテゴリあり ＆ 期限日順
-	List<Task> findByCategoryIdOrderByClosingDateAsc(Integer categoryId);
-
-	// カテゴリなし ＆ 期限日順
-	List<Task> findAllByOrderByClosingDateAsc();
-
-	// 日付のみで検索
-	List<Task> findByDate(LocalDate date);
-
-	// 日付 ＋ カテゴリーで検索
-	List<Task> findByDateAndCategoryId(LocalDate date, Integer categoryId);
-
-	// 日付 ＋ 期限順
-	List<Task> findByDateOrderByClosingDateAsc(LocalDate date);
-
-	// 日付 ＋ カテゴリー ＋ 期限順
-	List<Task> findByDateAndCategoryIdOrderByClosingDateAsc(LocalDate date, Integer categoryId);
-
 	List<Task> findByCategoryId(Integer categoryId);
 
 	List<Task> findByUserId(Integer userId);
@@ -38,6 +20,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
 	List<Task> findByUserIdOrderByClosingDateAsc(Integer userId);
 
-	List<Task> findByUserIdAndDateOrderByClosingDateAsc(Integer userId, LocalDate date);
+	List<Task> findByUserIdAndClosingDateLessThanEqualOrderByClosingDateAsc(Integer userId, LocalDate date);
 
 }

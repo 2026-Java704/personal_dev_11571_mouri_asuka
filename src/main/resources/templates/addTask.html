@@ -1,66 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
-	<title>新規作成</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>タスク追加</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
+<body class="page-task-form">
+
+	<div class="form-container">
+		<h1>タスク新規追加</h1>
+
+		<form action="/tasks/create" method="post">
+			<label class="form-label">カテゴリー</label>
+			<div class="radio-group">
+				<input type="radio" name="categoryId" value="1" checked id="cat-work">
+				<label th:for="cat-work">仕事</label>
+				<input type="radio" name="categoryId" value="2" id="cat-daily">
+				<label th:for="cat-daily">日常</label>
+			</div>
+
+			<label class="form-label" for="task-title">タイトル</label>
+			<input type="text" class="form-input" name="title" id="task-title" placeholder="タスクのタイトルを入力" required>
 
 
-<body>
-	
-	<h1>タスク作成</h1>
-	<form action="/tasks/create" method="post">
+			<label class="form-label" for="task-date">開始日</label>
+			<input type="date" class="form-input" name="date" id="task-date" required>
 
 
-		<table border="1">
-			<tr>
-				<th>カテゴリー</th>
-				
-				<td>
-					<input type="radio" id="1" name="categoryId" value="1">
-					<label for="1">仕事</label>
+			<label class="form-label" for="task-closingDate">期限日</label>
+			<input type="date" class="form-input" name="closingDate" id="task-closingDate" required>
 
-					<input type="radio" id="2" name="categoryId" value="2">
-					<label for="2">日常</label><br>
-				</td>
-			</tr>
-			<tr>
-				<th>タイトル</th>
-				<td>
-					<input type="text" th:value="${title}" name="title">
-				</td>
-			</tr>
-			<tr>
-				<th>開始日</th>
-				<td>
-					<input type="date" th:value="${date}" name="date">
-				</td>
-			</tr>
-			<tr>
-				<th>期限</th>
-				<td>
-					<input type="date" th:value="${closingDate}" name="closingDate">
-				</td>
-			</tr>
-			<tr>
-				<th>予定所要時間(分)</th>
-				<td>
-					<input type="text" th:value="${time}" name="time">
-				</td>
-			</tr>
-			<tr>
-				<th>備考</th>
-				<td>
-					<input type="textarea" th:value="${memo}" name="memo">
-				</td>
-			</tr>
-	
-		</table>
-		<button>作成</button>
-		
-	</form>
+
+			<label class="form-label" for="task-time">予定所要時間 (分)</label>
+			<input type="number" class="form-input" name="time" id="task-time" placeholder="例: 30">
+
+
+			<label class="form-label" for="task-memo">備考 (メモ)</label>
+			<input type="text" class="form-input" name="memo" id="task-memo" placeholder="メモがあれば入力">
+
+			<input type="hidden" name="progress" value="0">
+
+			<div class="form-actions">
+				<button type="submit" class="btn-submit">登録 </button>
+				<a class="back-link" href="/tasks">キャンセルして一覧に戻る</a>
+			</div>
+		</form>
+	</div>
+
 </body>
 
 </html>
