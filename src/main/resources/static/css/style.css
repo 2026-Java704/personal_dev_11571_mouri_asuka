@@ -1,15 +1,14 @@
-@charset "UTF-8";
-
 /*全体共通*/
 * {
 	box-sizing: border-box;
 }
-
 *:focus {
 	outline: none;
 }
 
-/*ログイン画面*/
+/*==================
+	ログイン画面
+===================*/
 body.page-login {
 	font-family: Arial, sans-serif;
 	background-color: rgb(199, 208, 243);
@@ -21,29 +20,14 @@ body.page-login {
 	margin: 0;
 }
 
-.login {
+.login-screen {
 	margin: 20px auto;
 	width: 300px;
-}
-
-.login-screen {
 	background-color: #FFF;
 	padding: 20px;
 	border-radius: 10px;
 }
 
-.app-title {
-	text-align: center;
-	color: #777;
-}
-
-.login-form {
-	text-align: center;
-}
-
-.control-group {
-	margin-bottom: 10px;
-}
 
 .login-form input {
 	text-align: center;
@@ -55,6 +39,7 @@ body.page-login {
 	padding: 10px 0;
 	width: 250px;
 	transition: border .5s;
+	margin-bottom: 10px;
 }
 
 .login-form input:focus {
@@ -62,7 +47,8 @@ body.page-login {
 	box-shadow: none;
 }
 
-.login-form button.btn {
+/*ログインボタン*/
+.login-form.btn {
 	border: 2px solid transparent;
 	background: #3498DB;
 	color: #ffffff;
@@ -80,7 +66,7 @@ body.page-login {
 	cursor: pointer;
 }
 
-.login-form button.btn:hover {
+.login-form.btn:hover {
 	background-color: #2980B9;
 }
 
@@ -92,9 +78,11 @@ body.page-login {
 	text-decoration: none;
 }
 
-/*タスク一覧画面*/
+/*======================
+	タスク一覧画面
+=======================*/
 body.page-tasks {
-	background-color: #ECF0F1; 
+	background-color: #ECF0F1;
 	margin: 0;
 	padding: 20px;
 	font-family: Arial, sans-serif;
@@ -106,7 +94,7 @@ body.page-tasks main {
 	border-radius: 10px;
 	max-width: 1000px;
 	margin: 20px auto;
-	box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 body.page-tasks header {
@@ -119,7 +107,7 @@ body.page-tasks header {
 }
 
 body.page-tasks header h1 a {
-	color: rgb(131, 131, 248); 
+	color: rgb(131, 131, 248);
 	text-decoration: none;
 	font-weight: bold;
 }
@@ -153,10 +141,6 @@ body.page-tasks td {
 	text-align: center;
 }
 
-body.page-tasks tr:hover {
-	background-color: #F8F9FA;
-}
-
 .total-time-box {
 	background-color: #EBF5FB;
 	color: #2980B9;
@@ -171,8 +155,13 @@ body.page-tasks tr:hover {
 	background-color: #F9F9F9;
 	padding: 15px;
 	border-radius: 8px;
+	text-align: center;
 	margin-bottom: 15px;
 	border: 1px solid #EBF5FB;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
 }
 
 .logout-link {
@@ -184,56 +173,73 @@ body.page-tasks tr:hover {
 /*ボタン共通*/
 .btn {
 	display: inline-block;
-}
-
-/*期限順ボタン*/
-.btn button.btn-sort {
 	background-color: rgb(131, 131, 248);
+	border-radius: 5px;
 	color: #ffffff;
 	border: none;
 	cursor: pointer;
+}
+
+.btn:hover {
+	background-color:rgb(108, 108, 247)
+}
+
+/*期限順ボタン*/
+.btn.btn-sort {
 	margin: 0.5px;
 	padding: 5px 20px;
 	width: 80px;
 }
 
 /*変更ボタン*/
-.btn button.btn-change {
-	background-color: rgb(131, 131, 248);
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
+.btn.btn-edit {
 	margin: 0.5px;
 	padding: 5px 10px;
 	width: 50px;
 }
 
 /*進捗更新ボタン*/
-.btn button.btn-update {
-	background-color: rgb(131, 131, 248);
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
+.btn.btn-progress {
 	margin: 0.5px;
 	padding: 3px 8px;
-	font-size: 10px;
+	font-size: 12px;
 	line-height: 1.2;
 	width: 45px;
 }
 
 /*検索ボタン*/
-.btn button.btn-add {
-	background-color: rgb(131, 131, 248);
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
+.btn.btn-search {
 	margin: 2px;
 	padding: 5px 20px;
 	width: 80px;
 }
 
+/*追加(+)ボタン*/
+.btn.btn-add {
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	font-size: 24px;
+	padding: 0;
+	line-height: 46px;
+	align-items: right;
+}
 
-/*タスク追加/タスク編集画面*/
+/*削除ボタン*/
+.btn.btn-delete {
+	background-color: #e74c3c;
+	margin: 0.5px;
+	padding: 5px 10px;
+	width: 50px;
+}
+
+.btn.btn-delete:hover {
+	background-color:rgb(227, 51, 32)
+}
+
+/*===============================
+	タスク追加/タスク編集画面
+================================*/
 body.page-task-form {
 	font-family: Arial, sans-serif;
 	background-color: rgb(199, 208, 243);
@@ -252,7 +258,7 @@ body.page-task-form {
 	border-radius: 10px;
 	width: 100%;
 	max-width: 400px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h1 {
@@ -263,7 +269,7 @@ body.page-task-form {
 	margin-bottom: 20px;
 }
 
-
+/*各項目の見出し*/
 .form-label {
 	display: block;
 	text-align: left;
@@ -276,7 +282,7 @@ body.page-task-form {
 
 .form-input {
 	text-align: center;
-	background-color: #ECF0F1; 
+	background-color: #ECF0F1;
 	border: 2px solid transparent;
 	border-radius: 10px;
 	font-size: 15px;
@@ -342,7 +348,7 @@ body.page-task-form {
 	text-decoration: none;
 	text-align: center;
 }
+
 .back-link:hover {
 	text-decoration: underline;
 }
-

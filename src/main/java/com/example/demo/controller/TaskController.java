@@ -211,9 +211,6 @@ public class TaskController {
 			return "redirect:/tasks?date=" + selectedDate;
 		}
 
-		//	反映
-		//		taskRepository.save(task);
-
 		return "redirect:/tasks";
 	}
 

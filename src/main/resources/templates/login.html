@@ -9,34 +9,27 @@
 
 <body class="page-login">
 
-	<div class="login">
-		<div class="login-screen">
-			<div class="app-title">
-				<h1>ログイン</h1>
+	<div class="login-screen">
+		<div style="text-align: center;	color: #777;">
+			<h1>ログイン</h1>
+		</div>
+
+		<span th:if="${errorList}" th:each="error:${errorList}" th:text="${error}"></span>
+		<span th:text="${message}"
+			style="color: rgb(128, 0, 0); display: block; text-align: center; margin-bottom: 10px;"></span>
+
+		<form action="/login" method="post">
+
+			<div class="login-form">
+				<input type="text" class="login-field" name="name" th:value="${name}" placeholder="名前">
+				<input type="password" class="login-field" name="password" placeholder="パスワード">
 			</div>
 
-			<span th:text="${message}" class="control-group"
-				style="color: rgb(128, 0, 0); display: block; text-align: center; margin-bottom: 10px;"></span>
-				
-			<form action="/login" method="post" class="login-form">
 
-				<div class="control-group">
-					<input type="text" class="login-field" name="name" th:value="${name}" placeholder="名前"
-						id="login-name">
-					<label class="login-field-icon fui-user" for="login-name"></label>
-				</div>
+			<button type="submit" class="login-form btn">ログイン</button>
 
-				<div class="control-group">
-					<input type="password" class="login-field" name="password" placeholder="パスワード" id="login-pass">
-					<label class="login-field-icon fui-lock" for="login-pass"></label>
-				</div>
-
-
-				<button type="submit" class="btn btn-primary btn-large btn-block">ログイン</button>
-
-				<a class="login-link" href="/users/add">新規登録はこちら</a>
-			</form>
-		</div>
+			<a class="login-link" href="/users/add">新規登録はこちら</a>
+		</form>
 	</div>
 
 </body>

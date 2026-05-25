@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
@@ -83,10 +84,28 @@ public class UserController {
 			@RequestParam(defaultValue = "") String passwordConfirm,
 			Model model) {
 
+		List<String> errorList = new ArrayList<>();
+		// どちらかが空の場合にエラーとする
+		if (name.length() == 0) {
+			errorList.add("名前を入力してください");
+			return "addUser";
+		} else if (password.length() == 0) {
+			errorList.add("パスワードを入力してください");
+			//			model.addAttribute("name", name);
+			return "addUser";
+		}
+
 		//		パスワード確認
 		if (password.equals(passwordConfirm) == false) {
-			model.addAttribute("error", "パスワードが一致しませんでした");
-			return "/addUser";
+			errorList.add("パスワードが一致しませんでした");
+			return "addUser";
+		}
+
+		// エラー発生時はフォームに戻す
+		if (errorList.size() > 0) {
+			model.addAttribute("errorList", errorList);
+			model.addAttribute("name", name);
+			return "accountForm";
 		}
 
 		User user = new User(name, password);

@@ -3,7 +3,6 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>タスク一覧</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -26,10 +25,7 @@
 				<input type="radio" name="categoryId" value="" th:checked="${categoryId == null}"> 全て
 				<input type="radio" name="categoryId" value="1" th:checked="${categoryId == 1}"> 仕事
 				<input type="radio" name="categoryId" value="2" th:checked="${categoryId == 2}"> 日常
-
-				<div class="btn" style="margin-left: 10px;">
-					<button type="submit" class="btn-sort">期限順</button>
-				</div>
+				<button type="submit" class="btn btn-sort">期限順</button>
 			</div>
 
 			<div class="total-time-box" th:if="${totalTime != null and totalTime > 0}">
@@ -38,84 +34,67 @@
 			</div>
 
 			<div class="search-box">
-				<div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
-					<span> 期限が </span>
-					<input type="date" id="closing-date" name="date" th:value="${selectedDate}"
-						style="padding: 6px; font-size: 14px; border: 2px solid #ECF0F1; border-radius: 5px; text-align: center;">
-					<span> までのタスクを表示 </span>
-
-					<div class="btn">
-						<button type="submit" class="btn-add">検索</button>
-					</div>
-				</div>
+				<span> 期限が </span>
+				<input type="date" id="closing-date" name="date" th:value="${selectedDate}"
+					style="padding: 6px; font-size: 14px; border: 2px solid #ECF0F1; border-radius: 5px; text-align: center;">
+				<span> までのタスクを表示 </span>
+				<button type="submit" class="btn btn-search">検索</button>
 			</div>
 
 			<table>
-				<thead>
-					<tr>
-						<th style="width: 70px;"></th>
-						<th>タイトル</th>
-						<th style="width: 120px;">進捗状況</th>
-						<th>開始日</th>
-						<th>期限</th>
-						<th>予定所要時間</th>
-						<th>備考</th>
-						<th style="width: 70px;"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="task : ${tasks}">
-						<td>
-							<div class="btn">
-								<button type="submit" th:formaction="@{/tasks/{id}/edit(id=${task.taskId})}"
-									formmethod="get" class="btn-change">
-									変更
-								</button>
-							</div>
-						</td>
+				<tr>
+					<th></th>
+					<th>タイトル</th>
+					<th>進捗状況</th>
+					<th>開始日</th>
+					<th>期限</th>
+					<th>予定所要時間</th>
+					<th>備考</th>
+					<th></th>
+				</tr>
 
-						<td th:text="${task.title}" style="text-align: left; font-weight: bold;"></td>
+				<tr th:each="task : ${tasks}">
+					<td>
+						<button type="submit" th:formaction="@{/tasks/{id}/edit(id=${task.taskId})}" formmethod="get"
+							class="btn btn-edit">
+							変更
+						</button>
+					</td>
 
-						<td>
-							<div style="margin-bottom: 5px; font-size: 13px;">
-								<span th:if="${task.progress == 0 or task.progress == null}">未着手</span>
-								<span th:if="${task.progress == 1}">進行中</span>
-								<span th:if="${task.progress == 2}">完了</span>
-							</div>
+					<td th:text="${task.title}" style="font-weight: bold;"></td>
 
-							<div class="btn">
-								<button type="submit"
-									th:formaction="@{/tasks/{id}/edit(id=${task.taskId}, stepProgress=true, selectedDate=${selectedDate})}"
-									formmethod="post" class="btn-update">
-									進捗<br>更新
-								</button>
-							</div>
-						</td>
+					<td>
+						<div style="margin-bottom: 5px;">
+							<span th:if="${task.progress == 0 or task.progress == null}">未着手</span>
+							<span th:if="${task.progress == 1}">進行中</span>
+							<span th:if="${task.progress == 2}">完了</span>
+						</div>
 
-						<td th:text="${task.date}"></td>
-						<td th:text="${task.closingDate}" style="color: #2980B9; font-weight: bold;"></td>
-						<td th:text="${task.time} + '分'"></td>
-						<td th:text="${task.memo}" style="text-align: left; color: #777;"></td>
+						<button type="submit" class="btn btn-progress"
+							th:formaction="@{/tasks/{id}/edit(id=${task.taskId}, stepProgress=true, selectedDate=${selectedDate})}"
+							formmethod="post">
+							進捗<br>更新
+						</button>
+					</td>
 
-						<td>
-							<div class="btn">
-								<button type="submit" th:formaction="@{/tasks/{id}/delete(id=${task.taskId})}"
-									formmethod="post" onclick="return confirm('現在選択中のタスクを削除します。よろしいですか？');"
-									class="btn-change" style="background-color: #e74c3c;">
-									削除
-								</button>
-							</div>
-						</td>
-					</tr>
-				</tbody>
+					<td th:text="${task.date}"></td>
+					<td th:text="${task.closingDate}" style="color: #2980B9; font-weight: bold;"></td>
+					<td th:text="${task.time} + '分'"></td>
+					<td th:text="${task.memo}" style="color: #777;"></td>
+
+					<td>
+						<button type="submit" class="btn btn-delete"
+							th:formaction="@{/tasks/{id}/delete(id=${task.taskId})}" formmethod="post"
+							onclick="return confirm('現在選択中のタスクを削除します。よろしいですか？');">
+							削除
+						</button>
+					</td>
+				</tr>
 			</table>
 		</form>
 
 		<form th:action="@{/tasks/create}" method="get" style="margin-top: 25px; text-align: right;">
-			<div class="btn">
-				<button type="submit" class="btn-add"
-					style="width: 50px; height: 50px; border-radius: 50px; font-size: 24px; padding: 0; line-height: 46px;">＋</button>
-			</div>
+				<button type="submit" class="btn btn-add">＋</button>
 		</form>
 	</main>
 </body>
