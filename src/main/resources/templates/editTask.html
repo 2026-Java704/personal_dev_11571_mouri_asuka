@@ -16,47 +16,44 @@
 
 			<label class="form-label">カテゴリー</label>
 			<div class="radio-group">
-				<input type="radio" name="categoryId" value="1" th:checked="${task.categoryId == 1}" id="edit-cat-work">
-				<label th:for="edit-cat-work">仕事</label>
-				<input type="radio" name="categoryId" value="2" th:checked="${task.categoryId == 2}" id="edit-cat-daily"> 
-				<label th:for="edit-cat-daily">日常</label>
+				<input type="radio" name="categoryId" value="1" th:checked="${task.categoryId == 1}"
+				id="category" for="category">仕事
+				<input type="radio" name="categoryId" value="2" th:checked="${task.categoryId == 2}"
+				id="category" for="category">日常
 			</div>
 
-			<label class="form-label" for="edit-title">タイトル</label>
-			<input type="text" class="form-input" name="title" id="edit-title" th:value="${task.title}" required>
+			<label class="form-label">タイトル</label>
+			<input type="text" class="form-input" name="title" th:value="${task.title}">
 
 			<label class="form-label">進捗状況</label>
 			<div class="radio-group">
-				
 				<input type="radio" name="progress" value="0"
-					th:checked="${task.progress == 0 or task.progress == null}" id="progress-0"> 
-					<label th:for="progress-0">未着手</label>
-					
-				<input type="radio" name="progress" value="1" th:checked="${task.progress == 1}" id="progress-1">
-				 <label	th:for="progress-1">進行中</label>
-		
-				<input type="radio" name="progress" value="2" th:checked="${task.progress == 2}" id="progress-2"> 
-				<label th:for="progress-2">完了</label>
-					
+					th:checked="${task.progress == 0 or task.progress == null}" id="progress">
+				<label for="progress">未着手</label>
+
+				<input type="radio" name="progress" value="1" th:checked="${task.progress == 1}" id="progress">
+				<label for="progress">進行中</label>
+
+				<input type="radio" name="progress" value="2" th:checked="${task.progress == 2}" id="progress">
+				<label for="progress">完了</label>
 			</div>
 
-			<label class="form-label" for="edit-date">開始日</label>
-			<input type="date" class="form-input" name="date" id="edit-date" th:value="${task.date}" required>
+			<label class="form-label">開始日</label>
+			<input type="date" class="form-input" name="date" th:value="${task.date}">
 
-	
-			<label class="form-label" for="edit-closingDate">期限日</label>
-			<input type="date" class="form-input" name="closingDate" id="edit-closingDate"
-				th:value="${task.closingDate}" required>
 
-			<label class="form-label" for="edit-time">予定所要時間 (分)</label>
-			<input type="number" class="form-input" name="time" id="edit-time" th:value="${task.time}">
+			<label class="form-label">期限日</label>
+			<input type="date" class="form-input" name="closingDate" th:value="${task.closingDate}">
 
-			<label class="form-label" for="edit-memo">備考 (メモ)</label>
-			<input type="text" class="form-input" name="memo" id="edit-memo" th:value="${task.memo}">
+			<label class="form-label">予定所要時間 (分)</label>
+			<input type="number" class="form-input" name="time" th:value="${task.time}">
+
+			<label class="form-label">備考 (メモ)</label>
+			<input type="text" class="form-input" name="memo" th:value="${task.memo}">
 
 			<div class="form-actions">
 				<button type="submit" class="btn-submit">変更を保存する</button>
-				<a class="back-link" href="/tasks">変更せずに一覧に戻る</a>
+				<a class="cancel-link" href="/tasks">変更せずに一覧に戻る</a>
 			</div>
 		</form>
 	</div>

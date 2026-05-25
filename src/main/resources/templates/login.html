@@ -10,19 +10,18 @@
 <body class="page-login">
 
 	<div class="login-screen">
-		<div style="text-align: center;	color: #777;">
 			<h1>ログイン</h1>
-		</div>
 
-		<span th:if="${errorList}" th:each="error:${errorList}" th:text="${error}"></span>
-		<span th:text="${message}"
-			style="color: rgb(128, 0, 0); display: block; text-align: center; margin-bottom: 10px;"></span>
+		<div class="error">
+			<span th:if="${errorList}" th:each="error:${errorList}" th:text="${error}"></span>
+			<span th:text="${message}"></span>
+		</div>
 
 		<form action="/login" method="post">
 
 			<div class="login-form">
-				<input type="text" class="login-field" name="name" th:value="${name}" placeholder="名前">
-				<input type="password" class="login-field" name="password" placeholder="パスワード">
+				<input type="text" name="name" th:value="${name}" placeholder="名前">
+				<input type="password" name="password" placeholder="パスワード">
 			</div>
 
 

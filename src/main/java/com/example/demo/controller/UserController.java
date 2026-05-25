@@ -88,24 +88,20 @@ public class UserController {
 		// どちらかが空の場合にエラーとする
 		if (name.length() == 0) {
 			errorList.add("名前を入力してください");
-			return "addUser";
 		} else if (password.length() == 0) {
 			errorList.add("パスワードを入力してください");
-			//			model.addAttribute("name", name);
-			return "addUser";
 		}
 
 		//		パスワード確認
 		if (password.equals(passwordConfirm) == false) {
 			errorList.add("パスワードが一致しませんでした");
-			return "addUser";
 		}
 
 		// エラー発生時はフォームに戻す
 		if (errorList.size() > 0) {
 			model.addAttribute("errorList", errorList);
 			model.addAttribute("name", name);
-			return "accountForm";
+			return "addUser";
 		}
 
 		User user = new User(name, password);

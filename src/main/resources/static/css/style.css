@@ -2,13 +2,14 @@
 * {
 	box-sizing: border-box;
 }
+
 *:focus {
 	outline: none;
 }
 
-/*==================
-	ログイン画面
-===================*/
+/*===============================
+	ログイン画面・新規登録画面
+===============================*/
 body.page-login {
 	font-family: Arial, sans-serif;
 	background-color: rgb(199, 208, 243);
@@ -23,7 +24,9 @@ body.page-login {
 .login-screen {
 	margin: 20px auto;
 	width: 300px;
+	color: #777;
 	background-color: #FFF;
+	text-align: center;
 	padding: 20px;
 	border-radius: 10px;
 }
@@ -45,6 +48,13 @@ body.page-login {
 .login-form input:focus {
 	border: 2px solid rgb(199, 208, 243);
 	box-shadow: none;
+}
+
+.error {
+	color: rgb(128, 0, 0);
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 /*ログインボタン*/
@@ -181,7 +191,8 @@ body.page-tasks td {
 }
 
 .btn:hover {
-	background-color:rgb(108, 108, 247)
+	background-color: rgb(108, 108, 247);
+	transform: scale(1.1,1.1);
 }
 
 /*期限順ボタン*/
@@ -234,7 +245,7 @@ body.page-tasks td {
 }
 
 .btn.btn-delete:hover {
-	background-color:rgb(227, 51, 32)
+	background-color: rgb(227, 51, 32);
 }
 
 /*===============================
@@ -250,7 +261,6 @@ body.page-task-form {
 	min-height: 100vh;
 	margin: 0;
 }
-
 
 .form-container {
 	background-color: #FFF;
@@ -269,7 +279,7 @@ body.page-task-form {
 	margin-bottom: 20px;
 }
 
-/*各項目の見出し*/
+/*各項目見出し*/
 .form-label {
 	display: block;
 	text-align: left;
@@ -297,7 +307,6 @@ body.page-task-form {
 	border: 2px solid #3498DB;
 }
 
-
 .radio-group {
 	text-align: left;
 	background-color: #F8F9FA;
@@ -308,18 +317,16 @@ body.page-task-form {
 	font-size: 14px;
 }
 
-.radio-group input[type="radio"] {
+.radio-group input {
 	margin-right: 5px;
 	margin-left: 10px;
 	cursor: pointer;
 }
 
-
 .form-actions {
 	margin-top: 20px;
 	text-align: center;
 }
-
 
 .form-actions button.btn-submit {
 	border: 2px solid transparent;
@@ -339,8 +346,8 @@ body.page-task-form {
 	background-color: #2980B9;
 }
 
-
-.back-link {
+/*キャンセルリンク*/
+.cancel-link {
 	font-size: 13px;
 	color: #777;
 	display: block;
@@ -349,6 +356,6 @@ body.page-task-form {
 	text-align: center;
 }
 
-.back-link:hover {
+.cancel-link:hover {
 	text-decoration: underline;
 }

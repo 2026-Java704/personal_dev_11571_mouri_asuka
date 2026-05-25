@@ -3,7 +3,6 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>タスク追加</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -16,36 +15,34 @@
 		<form action="/tasks/create" method="post">
 			<label class="form-label">カテゴリー</label>
 			<div class="radio-group">
-				<input type="radio" name="categoryId" value="1" checked id="cat-work">
-				<label th:for="cat-work">仕事</label>
-				<input type="radio" name="categoryId" value="2" id="cat-daily">
-				<label th:for="cat-daily">日常</label>
+				<input type="radio" name="categoryId" value="1" checked id="category" for="category">仕事
+				<input type="radio" name="categoryId" value="2" id="category" for="category">日常
 			</div>
 
-			<label class="form-label" for="task-title">タイトル</label>
-			<input type="text" class="form-input" name="title" id="task-title" placeholder="タスクのタイトルを入力" required>
+			<label class="form-label">タイトル</label>
+			<input type="text" class="form-input" name="title">
 
 
-			<label class="form-label" for="task-date">開始日</label>
-			<input type="date" class="form-input" name="date" id="task-date" required>
+			<label class="form-label">開始日</label>
+			<input type="date" class="form-input" name="date">
 
 
-			<label class="form-label" for="task-closingDate">期限日</label>
-			<input type="date" class="form-input" name="closingDate" id="task-closingDate" required>
+			<label class="form-label">期限日</label>
+			<input type="date" class="form-input" name="closingDate">
 
 
-			<label class="form-label" for="task-time">予定所要時間 (分)</label>
-			<input type="number" class="form-input" name="time" id="task-time" placeholder="例: 30">
+			<label class="form-label">予定所要時間 (分)</label>
+			<input type="number" class="form-input" name="time" placeholder="例: 30">
 
 
-			<label class="form-label" for="task-memo">備考 (メモ)</label>
-			<input type="text" class="form-input" name="memo" id="task-memo" placeholder="メモがあれば入力">
+			<label class="form-label">備考 (メモ)</label>
+			<input type="text" class="form-input" name="memo">
 
 			<input type="hidden" name="progress" value="0">
 
 			<div class="form-actions">
 				<button type="submit" class="btn-submit">登録 </button>
-				<a class="back-link" href="/tasks">キャンセルして一覧に戻る</a>
+				<a class="cancel-link" href="/tasks">登録せずに一覧に戻る</a>
 			</div>
 		</form>
 	</div>
