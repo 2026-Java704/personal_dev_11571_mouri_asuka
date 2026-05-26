@@ -31,11 +31,11 @@
 
 
 			<label class="form-label">開始日</label>
-			<input type="date" class="form-input" name="date">
+			<input type="date" class="form-input" name="date" th:value="${task?.date}">
 
 
 			<label class="form-label">期限日</label>
-			<input type="date" class="form-input" name="closingDate">
+			<input type="date" class="form-input" name="closingDate" th:value="${task?.closingDate}">
 
 
 			<label class="form-label">予定所要時間 (分)</label>
