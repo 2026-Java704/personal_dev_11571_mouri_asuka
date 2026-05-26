@@ -63,7 +63,6 @@ public class UserController {
 
 		User user = userList.get(0);
 
-		// アカウント情報にIDと名前をセット
 		account.setUserId(user.getUserId());
 		account.setName(user.getName());
 
@@ -85,16 +84,25 @@ public class UserController {
 			Model model) {
 
 		List<String> errorList = new ArrayList<>();
+
 		// どちらかが空の場合にエラーとする
 		if (name.length() == 0) {
 			errorList.add("名前を入力してください");
-		} else if (password.length() == 0) {
+		}
+
+		if (password.length() == 0) {
 			errorList.add("パスワードを入力してください");
 		}
 
 		//		パスワード確認
 		if (password.equals(passwordConfirm) == false) {
 			errorList.add("パスワードが一致しませんでした");
+		}
+
+		// メールアドレス存在チェック
+		List<User> userList = userRepository.findByPassword(password);
+		if (userList != null && userList.size() > 0) {
+			errorList.add("登録済みのパスワードです");
 		}
 
 		// エラー発生時はフォームに戻す

@@ -11,16 +11,23 @@
 
 	<div class="form-container">
 		<h1>タスク新規追加</h1>
+		<div class="error">
+			<span th:if="${errorList}" th:each="error:${errorList}" th:text="${error}"></span>
+			<span th:text="${message}"></span>
+		</div>
 
 		<form action="/tasks/create" method="post">
 			<label class="form-label">カテゴリー</label>
 			<div class="radio-group">
-				<input type="radio" name="categoryId" value="1" checked id="category" for="category">仕事
-				<input type="radio" name="categoryId" value="2" id="category" for="category">日常
+				<th:block th:each="category : ${categories}">
+					<input type="radio" name="categoryId" th:value="${category.categoryId}"
+						th:id="'category' + ${category.categoryId}" th:checked="${category.categoryId == 1}">
+					<label th:for="'category' + ${category.categoryId}">[[${category.categoryName}]]</label>
+				</th:block>
 			</div>
 
 			<label class="form-label">タイトル</label>
-			<input type="text" class="form-input" name="title">
+			<input type="text" class="form-input" name="title" th:value="${task?.title}">
 
 
 			<label class="form-label">開始日</label>
@@ -32,13 +39,13 @@
 
 
 			<label class="form-label">予定所要時間 (分)</label>
-			<input type="number" class="form-input" name="time" placeholder="例: 30">
+			<input type="number" class="form-input" name="time" th:value="${task?.time}" placeholder="例: 30">
 
 
 			<label class="form-label">備考 (メモ)</label>
-			<input type="text" class="form-input" name="memo">
+			<input type="text" class="form-input" th:value="${task?.memo}" name="memo">
 
-			<input type="hidden" name="progress" value="0">
+			<input type="hidden" name="progress" th:value="${task?.progress}" value="0">
 
 			<div class="form-actions">
 				<button type="submit" class="btn-submit">登録 </button>

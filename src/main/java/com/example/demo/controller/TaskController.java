@@ -39,39 +39,33 @@ public class TaskController {
 			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
 			Model model) {
 
-		// 全カテゴリー一覧を取得
-		List<Category> categoryList = categoryRepository.findAll();
+		List<Category> categoryList = categoryRepository.findAllByOrderByCategoryIdAsc();
 		model.addAttribute("categories", categoryList);
 
-		// ログイン中のユーザーIDを取得
 		Integer userId = account.getUserId();
 
-		// タスク一覧情報の取得
 		List<Task> taskList = null;
 
-		//		
-
 		if (categoryId == null) {
-			// カテゴリーも日付も何も選ばれていない
 			if (date == null) {
-				// ログインユーザーのタスクをすべて持ってくる（期限順）
+				// カテゴリーも日付も選ばれていない
 				taskList = taskRepository.findByUserIdOrderByClosingDateAsc(userId);
 			} else {
 				// 日付の指定だけあるとき
 				taskList = taskRepository.findByUserIdAndClosingDateLessThanEqualOrderByClosingDateAsc(userId, date);
 			}
 		} else {
-			// カテゴリーが選ばれているとき
 			if (date != null) {
-				// ユーザーID ＋ カテゴリー ＋ 日付 ＋ 期限順(できてないかも)
+				// カテゴリーも日付も指定
 				taskList = taskRepository.findByUserIdAndCategoryIdAndDateOrderByClosingDateAsc(
 						userId, categoryId, date);
 			} else {
-				// ユーザーID ＋ カテゴリー ＋ 期限順
+				// カテゴリーの指定だけあるとき
 				taskList = taskRepository.findByUserIdAndCategoryIdOrderByClosingDateAsc(userId, categoryId);
 			}
 		}
 
+		//予想所要時間合計を表示する
 		List<Task> displayTaskList = new ArrayList<>();
 		int totalTime = 0; // 合計時間を数える
 
@@ -97,7 +91,7 @@ public class TaskController {
 						}
 					}
 				} else {
-					// 日付が選ばれていないときは、すべて表示リストに入れる
+					// 日付が選ばれていないときは、全て表示する
 					displayTaskList.add(task);
 				}
 			}
@@ -106,6 +100,7 @@ public class TaskController {
 		model.addAttribute("tasks", displayTaskList);
 		model.addAttribute("selectedDate", date);
 		model.addAttribute("totalTime", totalTime);
+		model.addAttribute("account", account);
 
 		return "tasks";
 	}
@@ -113,7 +108,11 @@ public class TaskController {
 	//	タスクを追加する
 	//	新規作成フォーム表示
 	@GetMapping("/tasks/create")
-	public String create() {
+	public String create(Model model) {
+
+		List<Category> categoryList = categoryRepository.findAll();
+		model.addAttribute("categories", categoryList);
+
 		return "addTask";
 	}
 
@@ -128,6 +127,17 @@ public class TaskController {
 			@RequestParam(defaultValue = "") Integer time,
 			@RequestParam(defaultValue = "") LocalDate date,
 			Model model) {
+
+		if (date != null && closingDate != null && date.isAfter(closingDate)) {
+			Task task = new Task(categoryId, title, closingDate, progress, memo, time, date);
+			model.addAttribute("task", task);
+
+			List<Category> categoryList = categoryRepository.findAll();
+			model.addAttribute("categories", categoryList);
+
+			model.addAttribute("message", "開始日は期限日より前の日付を入力してください");
+			return "addTask";
+		}
 
 		Task task = new Task(categoryId, title, closingDate, progress, memo, time, date);
 
@@ -154,6 +164,10 @@ public class TaskController {
 		//ID（主キー）で検索
 		Task task = taskRepository.findById(taskId).get();
 		model.addAttribute("task", task);
+
+		List<Category> categoryList = categoryRepository.findAll();
+		model.addAttribute("categories", categoryList);
+
 		return "editTask";
 	}
 
@@ -169,7 +183,8 @@ public class TaskController {
 			@RequestParam(defaultValue = "") Integer time,
 			@RequestParam(defaultValue = "") LocalDate date,
 			@RequestParam(defaultValue = "false") boolean stepProgress,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) {
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate,
+			Model model) {
 
 		//	ID（主キー）で検索
 		Task task = taskRepository.findById(taskId).get();
@@ -181,8 +196,8 @@ public class TaskController {
 				task.setProgress(0);
 			}
 
-			// 「進捗更新」ボタンが押されたとき
-			int nextProgress = task.getProgress() + 1; // 今の進捗に +1 する
+			// 進捗更新ボタンが押されたとき
+			int nextProgress = task.getProgress() + 1;
 
 			if (nextProgress >= 2) {
 				// +1した結果が「2（完了）」になったら、このタスクを削除する
@@ -195,7 +210,24 @@ public class TaskController {
 
 		} else {
 
-			// 編集画面（editTask）から「保存」ボタンが押されたとき
+			if (date != null && closingDate != null && date.isAfter(closingDate)) {
+
+				task.setCategoryId(categoryId);
+				task.setTitle(title);
+				task.setClosingDate(closingDate);
+				task.setProgress(progress);
+				task.setMemo(memo);
+				task.setTime(time);
+				task.setDate(date);
+				model.addAttribute("task", task);
+
+				List<Category> categoryList = categoryRepository.findAll();
+				model.addAttribute("categories", categoryList);
+
+				model.addAttribute("message", "開始日は期限日より前の日付を入力してください");
+				return "editTask";
+			}
+
 			task.setCategoryId(categoryId);
 			task.setTitle(title);
 			task.setClosingDate(closingDate);

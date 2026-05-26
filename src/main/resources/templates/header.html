@@ -1,0 +1,15 @@
+
+	<header>
+		<h1><a href="/tasks">ToDoリスト</a></h1>
+		<div>
+			<span th:if="${account?.name != null}" style="color: rgb(223, 223, 223); margin-right: 15px; font-size: 14px;">
+				[[${account.name}]]さんがログイン中
+				<a href="/logout" class="logout-link" onclick="return confirm('ログアウトします。よろしいですか？');"
+					style="margin-left: 10px;">ログアウト</a>
+			</span>
+			<span th:if="${account?.name == null}" style="color: rgb(223, 223, 223); margin-right: 15px; font-size: 14px;">
+				ゲスト
+				<a href="/login" class="login-link2">ログイン</a>
+			</span>
+		</div>
+	</header>

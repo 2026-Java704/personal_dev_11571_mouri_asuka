@@ -12,14 +12,20 @@
 	<div class="form-container">
 		<h1>タスク内容変更</h1>
 
+		<div class="error">
+			<span th:if="${errorList}" th:each="error:${errorList}" th:text="${error}"></span>
+			<span th:text="${message}"></span>
+		</div>
+
 		<form th:action="@{/tasks/{id}/edit(id=${task.taskId})}" method="post">
 
 			<label class="form-label">カテゴリー</label>
 			<div class="radio-group">
-				<input type="radio" name="categoryId" value="1" th:checked="${task.categoryId == 1}"
-				id="category" for="category">仕事
-				<input type="radio" name="categoryId" value="2" th:checked="${task.categoryId == 2}"
-				id="category" for="category">日常
+				<th:block th:each="category : ${categories}">
+					<input type="radio" name="categoryId" th:value="${category.categoryId}"
+						th:id="'category' + ${category.categoryId}" th:checked="${category.categoryId == 1}">
+					<label th:for="'category' + ${category.categoryId}">[[${category.categoryName}]]</label>
+				</th:block>
 			</div>
 
 			<label class="form-label">タイトル</label>

@@ -55,37 +55,7 @@ body.page-login {
 	display: block;
 	text-align: center;
 	margin-bottom: 10px;
-}
-
-/*ログインボタン*/
-.login-form.btn {
-	border: 2px solid transparent;
-	background: #3498DB;
-	color: #ffffff;
-	font-size: 16px;
-	line-height: 25px;
-	padding: 10px 0;
-	text-decoration: none;
-	text-shadow: none;
-	border-radius: 10px;
-	box-shadow: none;
-	transition: 0.25s;
-	display: block;
-	width: 250px;
-	margin: 0 auto;
-	cursor: pointer;
-}
-
-.login-form.btn:hover {
-	background-color: #2980B9;
-}
-
-.login-link {
-	font-size: 12px;
-	color: #444;
-	display: block;
-	margin-top: 12px;
-	text-decoration: none;
+	font-size: 15px
 }
 
 /*======================
@@ -109,17 +79,34 @@ body.page-tasks main {
 
 body.page-tasks header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	padding-bottom: 15px;
+	background-color: #2980B9;
 	border-bottom: 2px solid #ECF0F1;
 	margin-bottom: 20px;
+	padding: 15px 20px;
+	position: relative;
+	border-radius: 30px;
 }
 
+body.page-tasks header h1 {
+	margin: 0;
+	font-size: 38px;
+}
+
+
 body.page-tasks header h1 a {
-	color: rgb(131, 131, 248);
+	color: rgb(255, 255, 255);
 	text-decoration: none;
 	font-weight: bold;
+	font-family: Arial;
+}
+
+body.page-tasks header div {
+	position: absolute;
+	right: 20px;
+	display: flex;
+	align-items: center;
 }
 
 .category-select {
@@ -172,80 +159,6 @@ body.page-tasks td {
 	gap: 10px;
 	align-items: center;
 	justify-content: center;
-}
-
-.logout-link {
-	color: #e74c3c;
-	text-decoration: none;
-	font-size: 14px;
-}
-
-/*ボタン共通*/
-.btn {
-	display: inline-block;
-	background-color: rgb(131, 131, 248);
-	border-radius: 5px;
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
-}
-
-.btn:hover {
-	background-color: rgb(108, 108, 247);
-	transform: scale(1.1,1.1);
-}
-
-/*期限順ボタン*/
-.btn.btn-sort {
-	margin: 0.5px;
-	padding: 5px 20px;
-	width: 80px;
-}
-
-/*変更ボタン*/
-.btn.btn-edit {
-	margin: 0.5px;
-	padding: 5px 10px;
-	width: 50px;
-}
-
-/*進捗更新ボタン*/
-.btn.btn-progress {
-	margin: 0.5px;
-	padding: 3px 8px;
-	font-size: 12px;
-	line-height: 1.2;
-	width: 45px;
-}
-
-/*検索ボタン*/
-.btn.btn-search {
-	margin: 2px;
-	padding: 5px 20px;
-	width: 80px;
-}
-
-/*追加(+)ボタン*/
-.btn.btn-add {
-	width: 50px;
-	height: 50px;
-	border-radius: 50px;
-	font-size: 24px;
-	padding: 0;
-	line-height: 46px;
-	align-items: right;
-}
-
-/*削除ボタン*/
-.btn.btn-delete {
-	background-color: #e74c3c;
-	margin: 0.5px;
-	padding: 5px 10px;
-	width: 50px;
-}
-
-.btn.btn-delete:hover {
-	background-color: rgb(227, 51, 32);
 }
 
 /*===============================
@@ -346,7 +259,123 @@ body.page-task-form {
 	background-color: #2980B9;
 }
 
-/*キャンセルリンク*/
+/*===========
+	ボタン
+===========*/
+
+/*ログインボタン*/
+.login-form.btn {
+	border: 2px solid transparent;
+	background: #3498DB;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-shadow: none;
+	border-radius: 10px;
+	box-shadow: none;
+	transition: 0.25s;
+	display: block;
+	width: 250px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.login-form.btn:hover {
+	background-color: #2980B9;
+}
+
+/*共通*/
+.btn {
+	display: inline-block;
+	background-color: rgb(131, 131, 248);
+	border-radius: 5px;
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: rgb(108, 108, 247);
+	transform: scale(1.1, 1.1);
+}
+
+/*期限順ボタン*/
+.btn.btn-sort {
+	margin: 0.5px;
+	padding: 5px 20px;
+	width: 80px;
+}
+
+/*変更ボタン*/
+.btn.btn-edit {
+	margin: 0.5px;
+	padding: 5px 10px;
+	width: 50px;
+}
+
+/*進捗更新ボタン*/
+.btn.btn-progress {
+	margin: 0.5px;
+	padding: 3px 8px;
+	font-size: 12px;
+	line-height: 1.2;
+	width: 45px;
+}
+
+/*検索ボタン*/
+.btn.btn-search {
+	margin: 2px;
+	padding: 5px 20px;
+	width: 80px;
+}
+
+/*追加(+)ボタン*/
+.btn.btn-add {
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	font-size: 24px;
+	padding: 0;
+	line-height: 46px;
+	margin-top: 10px;
+	display: block;
+	margin-left: auto;
+}
+
+/*新規作成ボタン*/
+.btn.btn-add2 {
+	margin: 2px;
+	padding: 5px 20px;
+	width: 90px;
+	font-size: 12px;
+}
+
+/*削除ボタン*/
+.btn.btn-delete {
+	background-color: rgb(234, 100, 85);
+	margin: 0.5px;
+	padding: 5px 10px;
+	width: 50px;
+}
+
+.btn.btn-delete:hover {
+	background-color: rgb(231, 80, 63);
+}
+
+/*カテゴリー編集ボタン*/
+.btn.btn-edit2 {
+	margin: 2px;
+	padding: 5px 20px;
+	width: 90px;
+	font-size: 10px;
+}
+
+
+/*=============
+	リンク
+=============*/
 .cancel-link {
 	font-size: 13px;
 	color: #777;
@@ -358,4 +387,45 @@ body.page-task-form {
 
 .cancel-link:hover {
 	text-decoration: underline;
+}
+
+.login-link {
+	font-size: 12px;
+	color: #444;
+	display: block;
+	margin-top: 12px;
+	text-decoration: none;
+}
+
+.login-link2 {
+	font-size: 14px;
+	color: rgb(255, 255, 255);
+	display: block;
+	margin-top: 12px;
+	text-decoration:underline;
+	text-decoration-thickness: 1px;
+}
+
+.logout-link {
+	color: rgb(255, 255, 255);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	font-size: 14px;
+}
+
+.category-link {
+	color: #666;
+	display: block;
+	margin-top: 20px;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.return-link {
+	color: #666;
+	display: block;
+	margin-top: 20px;
+	text-decoration: none;
+	font-size: 14px;
+	text-align: center;
 }

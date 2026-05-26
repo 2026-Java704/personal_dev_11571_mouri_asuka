@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>カテゴリー登録</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body class="page-task-form">
+
+	<div class="form-container">
+		<h1>カテゴリー登録</h1>
+
+		<form action="/categories/add" method="post">
+			<label class="form-label">カテゴリー名</label>
+			<input type="text" class="form-input" name="categoryName">
+			
+			<div class="form-actions">
+							<button type="submit" class="btn-submit">登録 </button>
+							<a class="cancel-link" href="/categories">登録せずに一覧に戻る</a>
+						</div>
+		</form>
+</body>
+
+</html>

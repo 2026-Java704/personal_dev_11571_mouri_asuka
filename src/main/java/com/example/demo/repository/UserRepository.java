@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	// SELECT * FROM customer WHERE name = ? AND password = ?
 	List<User> findByNameAndPassword(String name, String password);
 
+	List<User> findByPassword(String password);
+
 }

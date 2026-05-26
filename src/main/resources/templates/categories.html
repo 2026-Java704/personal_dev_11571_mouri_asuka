@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>カテゴリー一覧</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body class="page-tasks">
+
+	<header th:replace="~{header}"></header>
+
+	<main>
+
+		<form action="/categories" method="get">
+			<table>
+				<tr>
+					<th>カテゴリー名</th>
+					<th>変更</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="category:${categories}">
+					<td th:text="${category.categoryName}"></td>
+					<td>
+						<button type="submit" th:formaction="@{/categories/{id}/edit(id=${category.categoryId})}"
+							formmethod="get" class="btn btn-edit">
+							変更
+						</button>
+					</td>
+					<td>
+						<button type="submit" class="btn btn-delete"
+							th:formaction="@{/categories/{id}/delete(id=${category.categoryId})}" formmethod="post"
+							onclick="return confirm('現在選択中のカテゴリーを削除します。よろしいですか？');">
+							削除
+						</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<form th:action="@{/tasks}" method="get">
+
+			<a class="return-link" href="/tasks">タスク一覧画面に戻る</a>
+
+		</form>
+
+		<form th:action="@{/categories/add}" method="get">
+			<button type="submit" class="btn btn-add">+</button>
+		</form>
+	</main>
+</body>
+
+</html>

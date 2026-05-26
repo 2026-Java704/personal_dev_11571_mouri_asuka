@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>カテゴリー更新</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body class="page-task-form">
+	<div class="form-container">
+		<h1>カテゴリー更新</h1>
+
+		<form th:action="'/categories/'+${category.categoryId}+'/edit'" method="post">
+			<label class="form-label">カテゴリー名</label>
+
+			<input type="text" class="form-input" name="categoryName" th:value="${category.categoryName}">
+
+			<div class="form-actions">
+				<button type="submit" class="btn-submit">変更を保存する</button>
+				<a class="cancel-link" href="/categories">変更せずに一覧に戻る</a>
+			</div>
+		</form>
+</body>
+
+</html>
