@@ -145,5 +145,4 @@ public class Task {
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
-
 }

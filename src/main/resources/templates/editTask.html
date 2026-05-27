@@ -23,9 +23,11 @@
 			<div class="radio-group">
 				<th:block th:each="category : ${categories}">
 					<input type="radio" name="categoryId" th:value="${category.categoryId}"
-						th:id="'category' + ${category.categoryId}" th:checked="${category.categoryId == 1}">
+						th:id="'category' + ${category.categoryId}"
+						th:checked="${category.categoryId == task.categoryId}">
 					<label th:for="'category' + ${category.categoryId}">[[${category.categoryName}]]</label>
 				</th:block>
+
 			</div>
 
 			<label class="form-label">タイトル</label>
